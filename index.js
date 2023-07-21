@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const acron = require("acorn");
+const walk = require("acorn-walk");
 const jsx = require("acorn-jsx");
 fs.readFile(path.join(__dirname, "page.jsx"), "utf8", (err, data) => {
   console.log(data);
@@ -11,10 +12,23 @@ fs.readFile(path.join(__dirname, "page.jsx"), "utf8", (err, data) => {
   });
   console.log(ast, "ast");
   console.log(JSON.stringify(ast), "stringAst");
-  // 生成 .wxml 代码
-
-  // 调用生成函数，开始生成 .wxml 代码
   let wxmlCode = "";
+  //Uncaught ReferenceError ReferenceError: parsedJsx is not defined
+  // walk.full(
+  //   ast,
+  //   (node) => {
+  //     console.log(node);
+  //   },
+  //   { ...walk.base, JSXElement: () => {} }
+  // );
+  // walk.simple(
+  //   parsedJsx,
+  //   {},
+  //   {
+  //     ...walk.base,
+  //     JSXElement: () => {},
+  //   }
+  // );
   function generateWXML(node) {
     if (node.type === "JSXElement") {
       const openingElement = node.openingElement;
@@ -35,11 +49,11 @@ fs.readFile(path.join(__dirname, "page.jsx"), "utf8", (err, data) => {
       }
       wxmlCode += `<${wxmlTagName}`;
 
-      attributes.forEach((attr) => {
-        const attrName = attr.name.name;
-        const attrValue = attr.value.value;
-        wxmlCode += ` ${attrName}="${attrValue}"`;
-      });
+      // attributes.forEach((attr) => {
+      //   const attrName = attr.name.name;
+      //   const attrValue = attr.value.value;
+      //   wxmlCode += ` ${attrName}="${attrValue}"`;
+      // });
 
       if (children.length > 0) {
         wxmlCode += ">\n";
