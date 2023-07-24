@@ -39,10 +39,10 @@ fs.readFile(path.join(__dirname, "page.jsx"), "utf8", (err, data) => {
       let wxmlTagName;
       switch (tagName) {
         case "div":
-          wxmlTagName = "View";
+          wxmlTagName = "view";
           break;
         case "text":
-          wxmlTagName = "Text";
+          wxmlTagName = "text";
         default:
           wxmlTagName = "view";
           break;
