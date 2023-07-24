@@ -1,6 +1,4 @@
-<View>
-<View>
-测试div</View>
 <view>
-测试text</view>
-</View>
+    <view>测试div</view>
+    <view>测试text</view>
+  </view>
